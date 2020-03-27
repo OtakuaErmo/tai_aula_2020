@@ -7,8 +7,8 @@
 
 
 -- Copiando estrutura do banco de dados para db_tai_aula
-CREATE DATABASE IF NOT EXISTS `db_tai_aula` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
-USE `db_tai_aula`;
+CREATE DATABASE IF NOT EXISTS `db_tai_aula_2020` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
+USE `db_tai_aula_2020`;
 
 -- Copiando estrutura para tabela db_tai_aula.cliente
 CREATE TABLE IF NOT EXISTS `cliente` (
