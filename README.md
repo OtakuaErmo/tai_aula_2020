@@ -8,19 +8,19 @@ Clonar Projeto
   git clone URL
 ```
 
-Add Arquivos \
+Add Arquivos 
   ```
   git add .
 ```
-Realizar o commit\
+Realizar o commit
   ```
   git commit -m "Sua mensagem"
 ```
-Enviar para o github\
+Enviar para o github
   ```
   git push
 ```
-Pegar atualização do repositorio\
+Pegar atualização do repositorio
   ```
   git pull
 ```
