@@ -8,7 +8,7 @@ class BD
         $host = "localhost";
         $db_nome = "db_tai_aula_2020";
         $db_usuario = "root";
-        $db_senha = "";
+        $db_senha = "123456";
         $db_charset = "utf8";
         $str_conn = "mysql:host=" . $host . ";dbname=" . $db_nome;
 
@@ -23,19 +23,42 @@ class BD
     public function selectAll()
     {
 
-        $conn = self::connection();
+        $conn = $this->connection();
         $stmt = $conn->prepare("SELECT * FROM cliente order by nome");
         $stmt->execute();
 
         return $stmt;
     }
+
+    public function insert($dados){
+        
+        $sql = "INSERT INTO cliente (nome, telefone, cpf, e-mail) 
+            VALUES (?, ?, ?, ?);";
+
+        $conn = $this->connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([ $dados['nome'],
+            $dados['telefone'],$dados['cpf'],$dados['e-mail'] ]);
+
+        return $stmt;
+
+    }
 }
 
 $dados = array(
     "nome" => "João",
-    "curso" => "INFORMÁTICA - TAI",
-    "turma" => "INFO06"
+    "telefone" => "84 98855-5500",
+    "cpf" => "55500055588",
+    "e-mail"=> "lordjoao@gmail.com"
 );
 
 $obj = new BD;
 $obj->connection();
+
+$result = $obj->selectAll();
+
+$obj->insert($dados);
+
+foreach ($result as $item) {
+    echo $item['id'] . "-" . $item['nome'] . "<br>";
+}
