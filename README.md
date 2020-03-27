@@ -3,17 +3,18 @@ Codigos-fonte aulas de programação Web com PHP para a turma do técnico em Inf
 
 # Comandos para o Git
 
-Clonar Projeto
-git clone URL
+Clonar Projeto \
+  git clone URL
 
-Add Arquivos 
-git add .
 
-Realizar o commit
-git commit -m "Sua mensagem"
+Add Arquivos \
+  git add .
 
-Enviar para o github
-git push
+Realizar o commit\
+  git commit -m "Sua mensagem"
 
-Pegar atualização do repositorio
-git pull
+Enviar para o github\
+  git push
+
+Pegar atualização do repositorio\
+  git pull
