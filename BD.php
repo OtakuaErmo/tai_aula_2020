@@ -38,3 +38,4 @@ $dados = array(
 );
 
 $obj = new BD;
+$obj->connection();
