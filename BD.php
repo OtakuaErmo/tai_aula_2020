@@ -7,7 +7,7 @@ class BD
     {
         $bd_tipo = "mysql";
         $host = "localhost";
-        $bd_nome = "bd_tai_aula_2020";
+        $bd_nome = "db_tai_aula_2020";
         $bd_porta = "3306";
         $bd_usuario = "root";
         $bd_senha = "";
