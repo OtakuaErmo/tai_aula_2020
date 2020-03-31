@@ -33,10 +33,37 @@ class BD
         return $stmt;
     }
 
+    public function insert($dados)
+    {
+
+        $sql = "INSERT INTO cliente (nome, telefone, cpf, e-mail) 
+            VALUES (?, ?, ?, ?);";
+
+        $conn = $this->connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            $dados['nome'],
+            $dados['telefone'], $dados['cpf'], $dados['e-mail']
+        ]);
+
+        return $stmt;
+    }
 }
+
+$dados = array(
+    "nome" => "João",
+    "telefone" => "84 98855-5500",
+    "cpf" => "55500055588",
+    "e-mail" => "lordjoao@gmail.com"
+);
 
 $obj = new BD;
 $obj->connection();
 
 $result = $obj->selectAll();
 
+$obj->insert($dados);
+
+foreach ($result as $item) {
+    echo $item['id'] . "-" . $item['nome'] . "<br>";
+}
