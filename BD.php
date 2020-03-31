@@ -36,7 +36,7 @@ class BD
     public function insert($dados)
     {
 
-        $sql = "INSERT INTO cliente (nome, telefone, cpf, e-mail) 
+        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `e-mail`) 
             VALUES (?, ?, ?, ?);";
 
         $conn = $this->connection();
