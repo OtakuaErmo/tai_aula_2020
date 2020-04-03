@@ -43,7 +43,7 @@ include 'BD.php';
       <td>" . $item['id'] . "</td>
       <td>" . $item['nome'] . "</td>
       <td>" . $item['cpf'] . "</td>
-      <td><a href='#'>Editar</a></td>
+      <td><a href='formEditarCliente.php?id=" . $item['id'] . "'>Editar</a></td>
     </tr>
     ";
     //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente

@@ -38,6 +38,43 @@ class BD
         return $stmt;
     }
 
+    //funcao para buscar um registro no banco de dados através de um ID
+    public function find($id)
+    {
+        $conn = $this->connection(); // conecta o banco de dados
+        //prepara o select da tabela fazendo um Where pelo id
+        $stmt = $conn->prepare("SELECT * FROM cliente WHERE id = ?");
+        //executa o SQL
+        $stmt->execute([$id]);
+        //retorna a execução no formato de um objeto
+        return $stmt->fetchObject();
+    }
+
+    //funcao para atualziar os dados de um formulario
+    public function update($dados)
+    {
+
+        var_dump($dados);
+        //sintaxe do SQL para atualizar um cliente
+        $sql = "UPDATE `cliente` SET `nome`= ?, `telefone`= ?, `cpf`= ?,
+         `e-mail`= ? WHERE id= ? ;";
+
+        $conn = $this->connection(); //conecta ao banco de dados
+        //prepara o SQL
+        $stmt = $conn->prepare($sql);
+        //execulta o SQL substituindo onde tem a iterrogacao pelos parametros 
+        //passados atraves do vetor seguindo a mesma sequencia da esqueda para direita
+        //sendo o $dados['nome'] a representacao da primeira interrogacao e assim por diante
+        //o ultimo e o id representa o registro que sera alterado
+        $stmt->execute([
+            $dados['nome'],
+            $dados['telefone'], $dados['cpf'], $dados['e-mail'], $dados['id']
+        ]);
+
+        //retorna verdadeiro ou falso se executou a operacao
+        return $stmt;
+    }
+
     //funcao para realizer o insert de um registro no banco de dado 
     public function insert($dados)
     {
