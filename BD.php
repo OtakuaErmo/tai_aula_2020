@@ -3,8 +3,10 @@
 class BD
 {
 
+    //metodo para conexao com o banco de dados
     public function connection()
     {
+        //variaveis para configurar a conexao com o banco de dados
         $bd_tipo = "mysql";
         $host = "localhost";
         $bd_nome = "db_tai_aula_2020";
@@ -15,6 +17,7 @@ class BD
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
 
+        //retorna um objeto PDO com os seus atributos e metodos para manipular o Banco de dado
         return new PDO(
             $str_conn,
             $bd_usuario,
@@ -26,44 +29,72 @@ class BD
     public function selectAll()
     {
 
-        $conn = $this->connection();
-        $stmt = $conn->prepare("SELECT * FROM cliente order by nome");
+        $conn = $this->connection(); // conecta o banco de dados
+        //prepara o select da tabela
+        $stmt = $conn->prepare("SELECT * FROM cliente order by id desc");
+        //executa o SQL
         $stmt->execute();
-
+        //retorna a execução no formato de um Array
         return $stmt;
     }
 
-    public function insert($dados)
+    //funcao para buscar um registro no banco de dados através de um ID
+    public function find($id)
+    {
+        $conn = $this->connection(); // conecta o banco de dados
+        //prepara o select da tabela fazendo um Where pelo id
+        $stmt = $conn->prepare("SELECT * FROM cliente WHERE id = ?");
+        //executa o SQL
+        $stmt->execute([$id]);
+        //retorna a execução no formato de um objeto
+        return $stmt->fetchObject();
+    }
+
+    //funcao para atualziar os dados de um formulario
+    public function update($dados)
     {
 
+        var_dump($dados);
+        //sintaxe do SQL para atualizar um cliente
+        $sql = "UPDATE `cliente` SET `nome`= ?, `telefone`= ?, `cpf`= ?,
+         `e-mail`= ? WHERE id= ? ;";
+
+        $conn = $this->connection(); //conecta ao banco de dados
+        //prepara o SQL
+        $stmt = $conn->prepare($sql);
+        //execulta o SQL substituindo onde tem a iterrogacao pelos parametros 
+        //passados atraves do vetor seguindo a mesma sequencia da esqueda para direita
+        //sendo o $dados['nome'] a representacao da primeira interrogacao e assim por diante
+        //o ultimo e o id representa o registro que sera alterado
+        $stmt->execute([
+            $dados['nome'],
+            $dados['telefone'], $dados['cpf'], $dados['e-mail'], $dados['id']
+        ]);
+
+        //retorna verdadeiro ou falso se executou a operacao
+        return $stmt;
+    }
+
+    //funcao para realizer o insert de um registro no banco de dado 
+    public function insert($dados)
+    {
+        var_dump($dados);
+        //sql do Insert
         $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `e-mail`) 
             VALUES (?, ?, ?, ?);";
 
-        $conn = $this->connection();
+        $conn = $this->connection(); //conecta ao banco de dado
+        //prepara o SQL
         $stmt = $conn->prepare($sql);
+        //execulta o SQL substituindo onde tem a iterrogacao pelos parametros 
+        //passados atraves do vetor seguindo a mesma sequencia da esqueda para direita
+        //sendo o $dados['nome'] a representacao da primeira interrogacao e assim por diante
         $stmt->execute([
             $dados['nome'],
             $dados['telefone'], $dados['cpf'], $dados['e-mail']
         ]);
 
+        //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
     }
-}
-
-$dados = array(
-    "nome" => "João",
-    "telefone" => "84 98855-5500",
-    "cpf" => "55500055588",
-    "e-mail" => "lordjoao@gmail.com"
-);
-
-$obj = new BD;
-$obj->connection();
-
-$result = $obj->selectAll();
-
-$obj->insert($dados);
-
-foreach ($result as $item) {
-    echo $item['id'] . "-" . $item['nome'] . "<br>";
 }
