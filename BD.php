@@ -10,7 +10,7 @@ class BD
         $bd_nome = "db_tai_aula_2020";
         $bd_porta = "3306";
         $bd_usuario = "root";
-        $bd_senha = "";
+        $bd_senha = "123456";
         $bd_charset = "utf8";
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
@@ -27,43 +27,51 @@ class BD
     {
 
         $conn = $this->connection();
-        $stmt = $conn->prepare("SELECT * FROM cliente order by nome");
+        $stmt = $conn->prepare("SELECT * FROM cliente order by id desc");
         $stmt->execute();
 
         return $stmt;
     }
 
+    public function find($id)
+    {
+        $conn = $this->connection();
+        $stmt = $conn->prepare("SELECT * FROM cliente WHERE id = ?;");
+        $stmt->execute([$id]);
+
+        return $stmt->fetchObject();
+    }
+
     public function insert($dados)
     {
 
-        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `e-mail`) 
+        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `email`) 
             VALUES (?, ?, ?, ?);";
 
         $conn = $this->connection();
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             $dados['nome'],
-            $dados['telefone'], $dados['cpf'], $dados['e-mail']
+            $dados['telefone'], $dados['cpf'], $dados['email']
         ]);
 
         return $stmt;
     }
-}
 
-$dados = array(
-    "nome" => "João",
-    "telefone" => "84 98855-5500",
-    "cpf" => "55500055588",
-    "e-mail" => "lordjoao@gmail.com"
-);
+    public function update($dados)
+    {
 
-$obj = new BD;
-$obj->connection();
+        $sql = "UPDATE `cliente` SET `nome` = ?,
+             `telefone` = ?, `cpf` = ?,
+             `email` = ? WHERE `id` = ?;";
 
-$result = $obj->selectAll();
+        $conn = $this->connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            $dados['nome'],
+            $dados['telefone'], $dados['cpf'], $dados['email'], $dados['id']
+        ]);
 
-$obj->insert($dados);
-
-foreach ($result as $item) {
-    echo $item['id'] . "-" . $item['nome'] . "<br>";
+        return $stmt;
+    }
 }
