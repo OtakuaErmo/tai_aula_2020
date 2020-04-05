@@ -45,9 +45,10 @@ include 'BD.php';
         <input type="text" name="telefone"> <br>
 
         <label>E-mail</label>
-        <input type="text" name="e-mail"> <br>
+        <input type="text" name="email"> <br>
 
         <input type="submit" value="Enviar">
+        <a href="listarCliente.php"><button>Voltar</button></a>
     </form>
 </body>
 

@@ -52,9 +52,10 @@ include 'BD.php';
 
         <label>E-mail</label>
         <!-- passo valor do atributo e-mail para a propriedade value -->
-        <input type="text" name="e-mail" value="<?php echo $objCliente->e - mail; ?>"> <br>
+        <input type="text" name="email" value="<?php echo $objCliente->email; ?>"> <br>
 
         <input type="submit" value="Editar">
+        <a href="listarCliente.php"><button>Voltar</button></a>
     </form>
 </body>
 

@@ -57,7 +57,7 @@ class BD
         var_dump($dados);
         //sintaxe do SQL para atualizar um cliente
         $sql = "UPDATE `cliente` SET `nome`= ?, `telefone`= ?, `cpf`= ?,
-         `e-mail`= ? WHERE id= ? ;";
+         `email`= ? WHERE id= ? ;";
 
         $conn = $this->connection(); //conecta ao banco de dados
         //prepara o SQL
@@ -68,7 +68,7 @@ class BD
         //o ultimo e o id representa o registro que sera alterado
         $stmt->execute([
             $dados['nome'],
-            $dados['telefone'], $dados['cpf'], $dados['e-mail'], $dados['id']
+            $dados['telefone'], $dados['cpf'], $dados['email'], $dados['id']
         ]);
 
         //retorna verdadeiro ou falso se executou a operacao
@@ -80,7 +80,7 @@ class BD
     {
         var_dump($dados);
         //sql do Insert
-        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `e-mail`) 
+        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `email`) 
             VALUES (?, ?, ?, ?);";
 
         $conn = $this->connection(); //conecta ao banco de dado
@@ -91,7 +91,7 @@ class BD
         //sendo o $dados['nome'] a representacao da primeira interrogacao e assim por diante
         $stmt->execute([
             $dados['nome'],
-            $dados['telefone'], $dados['cpf'], $dados['e-mail']
+            $dados['telefone'], $dados['cpf'], $dados['email']
         ]);
 
         //retorna verdadeiro ou falso se executou a operacao

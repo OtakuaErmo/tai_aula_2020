@@ -15,7 +15,7 @@ include 'BD.php';
 <body>
     <!-- formulario com o botao para chamar o arquivo formCliente -->
     <form action="formCliente.php" method="POST">
-        <label>Cadastrar Cliente</label>
+        <label>Cadastrar Cliente: </label>
         <input type="submit" value="Novo">
     </form>
     <?php
