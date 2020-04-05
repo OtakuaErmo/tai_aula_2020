@@ -25,7 +25,7 @@ include 'BD.php';
     $objBD->connection();
 
     //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
-    $result = $obj->selectAll();
+    $result = $objBD->selectAll();
 
     //monta uma tabela e lista os dados atraves do foreach
     echo "
