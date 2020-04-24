@@ -12,7 +12,7 @@ class BD
         $bd_nome = "db_tai_aula_2020";
         $bd_porta = "3306";
         $bd_usuario = "root";
-        $bd_senha = "123456";
+        $bd_senha = "";
         $bd_charset = "utf8";
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
