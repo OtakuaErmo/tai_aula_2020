@@ -44,7 +44,8 @@ include 'BD.php';
       <td>" . $item['nome'] . "</td>
       <td>" . $item['cpf'] . "</td>
       <td><a href='formEditarCliente.php?id=" . $item['id'] . "'>Editar</a></td>
-    </tr>
+      <td><a href='formDeletarCliente.php?id=" . $item['id'] . "'>Deletar</a></td>
+      </tr>
     ";
     //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
     }

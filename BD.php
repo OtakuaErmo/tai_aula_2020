@@ -12,7 +12,7 @@ class BD
         $bd_nome = "db_tai_aula_2020";
         $bd_porta = "3306";
         $bd_usuario = "root";
-        $bd_senha = "";
+        $bd_senha = "123456";
         $bd_charset = "utf8";
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
@@ -97,4 +97,17 @@ class BD
         //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
     }
+      //funcao para deletar um registro no banco de dados através de um ID
+      public function deletar($id)
+      {
+        //  var_dump($id);
+         // exit;
+          $conn = $this->connection(); // conecta o banco de dados
+          //prepara o deletar o registro da tabela fazendo um Where pelo id
+          $stmt = $conn->prepare("DELETE FROM `cliente` WHERE `id` = ?;");
+          //executa o SQL
+          $stmt->execute([$id]);
+          //retorna a execução no formato de um objeto
+          return $stmt;
+      }
 }
