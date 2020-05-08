@@ -38,7 +38,7 @@ INSERT INTO `cliente` (`id`, `nome`, `telefone`, `cpf`, `email`, `municipio_id`)
 	(37, 'Joãozinho dos Teclados', '49 88998899', '000.555.444-99', 'joaozinhodosteclados@gmail.com', 3),
 	(51, 'Chiquinha ', '49 88998899', '000.555.444-99', 'chiquinhachavina@gmail.com', 1),
 	(54, 'aaaa', '84 98855-5501', '379.404.144-53', 'lordjoao1@gmail.com', 2),
-	(55, 'aaa', '', 'aa', '', 3);
+	(55, 'Marcos', '84 98855-5501', 'aa', 'lordjoao2@gmail.com', 3);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela db_tai_aula_2020.municipio
