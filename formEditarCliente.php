@@ -31,6 +31,9 @@ include 'BD.php';
 
     //Busca os dados no banco de dados pelo ID da URL passando como parametro no metodo FIND
     $objCliente = $objBD->find($_GET['id']);
+
+    $resultMunicipio =  $objBD->selectAll("municipio");
+
     ?>
 
     <form action="formEditarCliente.php" method="POST">
@@ -53,6 +56,20 @@ include 'BD.php';
         <label>E-mail</label>
         <!-- passo valor do atributo e-mail para a propriedade value -->
         <input type="text" name="email" value="<?php echo $objCliente->email; ?>"> <br>
+
+        <label>Município</label>
+        <select name="municipio_id">
+            <?php
+            //percorre os municipios 
+            foreach ($resultMunicipio as $itens) {
+
+                $selected = ($itens['id'] == $objCliente->municipio_id ? "selected" : "");
+
+                echo "<option value='" . $itens['id'] . "' " . $selected . " >" . $itens['nome'] . "</option>";
+            }
+            ?>
+        </select>
+        <br>
 
         <input type="submit" value="Editar">
         <a href="listarCliente.php"><button>Voltar</button></a>

@@ -29,6 +29,9 @@ include 'BD.php';
         //depois que realizou a adicao
         header("Location: listarCliente.php");
     }
+
+    $resultMunicipios =  $objBD->selectAll("municipio");
+
     ?>
 
     <!-- propriedade action faz a chamada do BD.php para pegar o valor do form
@@ -47,6 +50,16 @@ include 'BD.php';
         <label>E-mail</label>
         <input type="text" name="email"> <br>
 
+        <label>Município</label>
+        <select name="municipio_id">
+            <?php
+            //listagem dos municipios
+            foreach ($resultMunicipios as $itens) {
+                echo "<option value='" . $itens['id'] . "'>" . $itens['nome'] . "</option>";
+            }
+            ?>
+        </select>
+        <br>
         <input type="submit" value="Enviar">
         <a href="listarCliente.php"><button>Voltar</button></a>
     </form>

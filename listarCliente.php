@@ -47,7 +47,7 @@ include 'BD.php';
       <td><a href='formDeletarCliente.php?id=" . $item['id'] . "'>Deletar</a></td>
       </tr>
     ";
-    //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
+        //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
     }
     echo "</table>";
 

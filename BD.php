@@ -12,7 +12,7 @@ class BD
         $bd_nome = "db_tai_aula_2020";
         $bd_porta = "3306";
         $bd_usuario = "root";
-        $bd_senha = "";
+        $bd_senha = "123456";
         $bd_charset = "utf8";
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
@@ -26,12 +26,12 @@ class BD
         );
     }
 
-    public function selectAll()
+    public function selectAll($tabela = 'cliente')
     {
 
         $conn = $this->connection(); // conecta o banco de dados
         //prepara o select da tabela
-        $stmt = $conn->prepare("SELECT * FROM cliente order by id desc");
+        $stmt = $conn->prepare("SELECT * FROM $tabela order by id desc");
         //executa o SQL
         $stmt->execute();
         //retorna a execução no formato de um Array
@@ -54,10 +54,9 @@ class BD
     public function update($dados)
     {
 
-        var_dump($dados);
         //sintaxe do SQL para atualizar um cliente
         $sql = "UPDATE `cliente` SET `nome`= ?, `telefone`= ?, `cpf`= ?,
-         `email`= ? WHERE id= ? ;";
+         `email`= ?, municipio_id = ? WHERE id= ? ;";
 
         $conn = $this->connection(); //conecta ao banco de dados
         //prepara o SQL
@@ -68,7 +67,7 @@ class BD
         //o ultimo e o id representa o registro que sera alterado
         $stmt->execute([
             $dados['nome'],
-            $dados['telefone'], $dados['cpf'], $dados['email'], $dados['id']
+            $dados['telefone'], $dados['cpf'], $dados['email'], $dados['municipio_id'], $dados['id']
         ]);
 
         //retorna verdadeiro ou falso se executou a operacao
@@ -80,8 +79,8 @@ class BD
     {
         var_dump($dados);
         //sql do Insert
-        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `email`) 
-            VALUES (?, ?, ?, ?);";
+        $sql = "INSERT INTO `cliente` (`nome`, `telefone`, `cpf`, `email`, `municipio_id`) 
+            VALUES (?, ?, ?, ?, ?);";
 
         $conn = $this->connection(); //conecta ao banco de dado
         //prepara o SQL
@@ -91,7 +90,7 @@ class BD
         //sendo o $dados['nome'] a representacao da primeira interrogacao e assim por diante
         $stmt->execute([
             $dados['nome'],
-            $dados['telefone'], $dados['cpf'], $dados['email']
+            $dados['telefone'], $dados['cpf'], $dados['email'], $dados['municipio_id']
         ]);
 
         //retorna verdadeiro ou falso se executou a operacao
