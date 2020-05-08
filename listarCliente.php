@@ -18,14 +18,30 @@ include 'BD.php';
         <label>Cadastrar Cliente: </label>
         <input type="submit" value="Novo">
     </form>
+    <br>
+    <form action="listarCliente.php" method="POST">
+        <label>Buscar: </label>
+        <input type="text" name="valor" />
+        <select name="tipo">
+            <option value="nome">Nome</option>
+            <option value="cpf">CPF</option>
+        </select>
+
+        <input type="submit" value="Buscar" />
+    </form>
     <?php
     //cria um instancia do objeto BD
     $objBD = new BD();
     //Faz a chamada do metodo Connection para conecta com o Banco de Dados
     $objBD->connection();
 
-    //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
-    $result = $objBD->selectAll();
+    //verifica se o usuario fez uma busca por um nome ou CPF
+    if (!empty($_POST['valor'])) {
+        $result = $objBD->search($_POST);
+    } else {
+        //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
+        $result = $objBD->selectAll();
+    }
 
     //monta uma tabela e lista os dados atraves do foreach
     echo "

@@ -50,6 +50,21 @@ class BD
         return $stmt->fetchObject();
     }
 
+    //funcao para buscar um registro no banco de dados através de um Nome
+    public function search($dados)
+    {   
+        $campo = $dados['tipo'];
+
+        $conn = $this->connection(); // conecta o banco de dados
+        //prepara o select da tabela fazendo um Where pelo nome utilizando o ignoreCase com o BINARY
+        //a variavel $campo ficou representando a coluna da tabela
+        $stmt = $conn->prepare("SELECT * FROM cliente WHERE $campo LIKE BINARY ?");
+        //executa o SQL colocando % para para realizar a busca do registro
+        $stmt->execute(["%" . $dados['valor'] . "%"]);
+        //retorna a execução no formato de um objeto
+        return $stmt;
+    }
+
     //funcao para atualziar os dados de um formulario
     public function update($dados)
     {
@@ -96,17 +111,17 @@ class BD
         //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
     }
-      //funcao para deletar um registro no banco de dados através de um ID
-      public function deletar($id)
-      {
+    //funcao para deletar um registro no banco de dados através de um ID
+    public function deletar($id)
+    {
         //  var_dump($id);
-         // exit;
-          $conn = $this->connection(); // conecta o banco de dados
-          //prepara o deletar o registro da tabela fazendo um Where pelo id
-          $stmt = $conn->prepare("DELETE FROM `cliente` WHERE `id` = ?;");
-          //executa o SQL
-          $stmt->execute([$id]);
-          //retorna a execução no formato de um objeto
-          return $stmt;
-      }
+        // exit;
+        $conn = $this->connection(); // conecta o banco de dados
+        //prepara o deletar o registro da tabela fazendo um Where pelo id
+        $stmt = $conn->prepare("DELETE FROM `cliente` WHERE `id` = ?;");
+        //executa o SQL
+        $stmt->execute([$id]);
+        //retorna a execução no formato de um objeto
+        return $stmt;
+    }
 }
