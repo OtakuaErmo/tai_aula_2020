@@ -13,41 +13,44 @@
 
 
 -- Copiando estrutura do banco de dados para db_tai_aula_2020
-CREATE DATABASE IF NOT EXISTS `db_tai_aula_2020` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
+CREATE DATABASE IF NOT EXISTS `db_tai_aula_2020` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `db_tai_aula_2020`;
 
 -- Copiando estrutura para tabela db_tai_aula_2020.cliente
 CREATE TABLE IF NOT EXISTS `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `telefone` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `cpf` varchar(14) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `cpf` varchar(14) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `municipio_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_cliente_municipio` (`municipio_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela db_tai_aula_2020.cliente: 5 rows
+-- Copiando dados para a tabela db_tai_aula_2020.cliente: 7 rows
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
 INSERT INTO `cliente` (`id`, `nome`, `telefone`, `cpf`, `email`, `municipio_id`) VALUES
 	(1, 'Jackson', '84 8800-5500', '555.000.555-11', 'exemplo@gmail.com', 2),
 	(2, 'Maria', '84 9900-5500', '000.555.000-55', 'exemplo2@gmail.com', 1),
 	(3, 'Luiz Macedo', '49 8855-1055', '44455501099', 'luizmacedo@gmail.com', 3),
 	(4, 'João Macedo', '84 98855-5501', '55501055588', 'lordjoao1@gmail.com', 1),
-	(37, 'Joãozinho dos Teclados', '49 88998899', '000.555.444-99', 'joaozinhodosteclados@gmail.com', 3);
+	(37, 'Joãozinho dos Teclados', '49 88998899', '000.555.444-99', 'joaozinhodosteclados@gmail.com', 3),
+	(51, 'Chiquinha ', '49 88998899', '000.555.444-99', 'chiquinhachavina@gmail.com', 1),
+	(54, 'aaaa', '84 98855-5501', '379.404.144-53', 'lordjoao1@gmail.com', 2),
+	(55, 'aaa', '', 'aa', '', 3);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela db_tai_aula_2020.municipio
 CREATE TABLE IF NOT EXISTS `municipio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(150) COLLATE utf8_bin NOT NULL,
-  `uf` varchar(2) COLLATE utf8_bin NOT NULL,
-  `estado` varchar(100) COLLATE utf8_bin NOT NULL,
+  `nome` varchar(150) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `estado` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela db_tai_aula_2020.municipio: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela db_tai_aula_2020.municipio: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
 INSERT INTO `municipio` (`id`, `nome`, `uf`, `estado`) VALUES
 	(1, 'Xanxerê', 'SC', 'Santa Catarina'),
