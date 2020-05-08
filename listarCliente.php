@@ -18,16 +18,14 @@ include 'BD.php';
         <label>Cadastrar Cliente: </label>
         <input type="submit" value="Novo">
     </form>
-    <br>
     <form action="listarCliente.php" method="POST">
         <label>Buscar: </label>
-        <input type="text" name="valor" />
+        <input type="text" name="valor"/>
         <select name="tipo">
             <option value="nome">Nome</option>
             <option value="cpf">CPF</option>
         </select>
-
-        <input type="submit" value="Buscar" />
+        <input type="submit" value="Buscar">
     </form>
     <?php
     //cria um instancia do objeto BD
@@ -35,12 +33,11 @@ include 'BD.php';
     //Faz a chamada do metodo Connection para conecta com o Banco de Dados
     $objBD->connection();
 
-    //verifica se o usuario fez uma busca por um nome ou CPF
-    if (!empty($_POST['valor'])) {
-        $result = $objBD->search($_POST);
-    } else {
-        //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
-        $result = $objBD->selectAll();
+    if(!empty($_POST['valor'])){
+       $result = $objBD->search($_POST);
+    }else{
+       //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
+       $result = $objBD->selectAll();
     }
 
     //monta uma tabela e lista os dados atraves do foreach
@@ -50,20 +47,24 @@ include 'BD.php';
   <th>ID</th>
   <th>Nome</th>
   <th>CPF</th>
+  <th>Município</th>
+  <th>UF</th>
   <th>Ação</th>
 </tr>";
-
     foreach ($result as $item) {
+        $objMunicipio = $objBD->find($item['municipio_id'], "municipio");
         echo "
     <tr>
       <td>" . $item['id'] . "</td>
       <td>" . $item['nome'] . "</td>
       <td>" . $item['cpf'] . "</td>
+      <td>" . $objMunicipio->nome  . "</td>
+      <td>" . $objMunicipio->uf  . "</td>
       <td><a href='formEditarCliente.php?id=" . $item['id'] . "'>Editar</a></td>
       <td><a href='formDeletarCliente.php?id=" . $item['id'] . "'>Deletar</a></td>
-      </tr>
+    </tr>
     ";
-        //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
+    //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
     }
     echo "</table>";
 

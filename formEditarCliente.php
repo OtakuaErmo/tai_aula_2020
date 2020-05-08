@@ -65,7 +65,8 @@ include 'BD.php';
                 // operador ternario IF para verificar se o id do municipio da listagem é o mesmo ID do campo municipio_id do cliente
                 $selected = ($itens['id'] == $objCliente->municipio_id ? "selected" : "");
                 // se a operação a cima for verdadeiro ele vai setar o municipio correto na Tag Select
-                echo "<option value='" . $itens['id'] . "' " . $selected . " >" . $itens['nome'] . "</option>";
+                echo "<option value='" . $itens['id'] . "' " . $selected . " >" .
+                  $itens['nome'] . "</option>";
             }
             ?>
         </select>

@@ -13,7 +13,7 @@ class BD
         $bd_porta = "3306";
         $bd_usuario = "root";
         $bd_senha = "123456";
-        $bd_charset = "utf8";
+        $bd_charset = "utf8mb4";
 
         $str_conn = $bd_tipo . ":host=" . $host . ";dbname=" . $bd_nome . ";port=" . $bd_porta;;
 
@@ -39,26 +39,26 @@ class BD
     }
 
     //funcao para buscar um registro no banco de dados através de um ID
-    public function find($id)
+    public function find($id, $tabela = "cliente")
     {
         $conn = $this->connection(); // conecta o banco de dados
         //prepara o select da tabela fazendo um Where pelo id
-        $stmt = $conn->prepare("SELECT * FROM cliente WHERE id = ?");
+        $stmt = $conn->prepare("SELECT * FROM $tabela WHERE id = ?");
         //executa o SQL
         $stmt->execute([$id]);
         //retorna a execução no formato de um objeto
         return $stmt->fetchObject();
     }
 
-    //funcao para buscar um registro no banco de dados através de um Nome
+    //funcao para buscar um registro no banco de dados através de um Campo
     public function search($dados)
-    {   
+    {
         $campo = $dados['tipo'];
 
         $conn = $this->connection(); // conecta o banco de dados
         //prepara o select da tabela fazendo um Where pelo nome utilizando o ignoreCase com o BINARY
         //a variavel $campo ficou representando a coluna da tabela
-        $stmt = $conn->prepare("SELECT * FROM cliente WHERE $campo LIKE BINARY ?");
+        $stmt = $conn->prepare("SELECT * FROM cliente WHERE $campo LIKE ?;");
         //executa o SQL colocando % para para realizar a busca do registro
         $stmt->execute(["%" . $dados['valor'] . "%"]);
         //retorna a execução no formato de um objeto
@@ -111,6 +111,7 @@ class BD
         //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
     }
+
     //funcao para deletar um registro no banco de dados através de um ID
     public function deletar($id)
     {
