@@ -50,6 +50,19 @@ class BD
         return $stmt->fetchObject();
     }
 
+     //funcao para logar no sistema
+     public function logar($login, $senha)
+     {
+         $conn = $this->connection(); // conecta o banco de dados
+         //prepara o select da tabela fazendo um Where pelo id
+         $stmt = $conn->prepare("SELECT * FROM usuario WHERE login = ? AND senha = ? AND ativo = 1");
+         //executa o SQL
+         var_dump($stmt);
+         $stmt->execute([$login,$senha]);
+         //retorna a execução no formato de um objeto
+         return $stmt->fetchObject();
+     }
+
     //funcao para buscar um registro no banco de dados através de um Campo
     public function search($dados)
     {

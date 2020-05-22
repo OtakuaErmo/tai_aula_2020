@@ -2,6 +2,11 @@
 // inclui o arquivo BD.php dentro deste arquivo 
 //para que seus metodos fiquem visiveis
 include 'BD.php';
+include 'util.php';
+
+session_start();
+
+verificarLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
