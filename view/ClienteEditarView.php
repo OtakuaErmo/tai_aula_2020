@@ -1,7 +1,12 @@
 <?php
-// inclui o arquivo BD.php dentro deste arquivo 
+// inclui o arquivo Model.php dentro deste arquivo
 //para que seus metodos fiquem visiveis
-include 'BD.php';
+include '../control/ClienteController.php';
+include '../util.php';
+
+session_start();
+
+verificarLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,26 +22,24 @@ include 'BD.php';
     <?php
 
     //cria um instancia do objeto BD
-    $objBD = new BD();
-    //Faz a chamada do metodo Connection para conecta com o Banco de Dados
-    $objBD->connection();
+    $objClienteModel = new ClienteModel();
 
     if (!empty($_POST)) {
         //chama o metodo UPDATE recebendo os dados do usuário através do metodo $_POST
-        $objBD->update($_POST);
+       ClienteController::update($_POST);
         //metodo header faz uma chamada para a tela de listagem
         //depois que realizou a edicao
-        header("Location: listarCliente.php");
+//        header("Location: ClienteListarView.php");
     }
 
     //Busca os dados no banco de dados pelo ID da URL passando como parametro no metodo FIND
-    $objCliente = $objBD->find($_GET['id']);
+    $objCliente = $objClienteModel::find($_GET['id']);
 
-    $resultMunicipio =  $objBD->selectAll("municipio");
+    $resultMunicipio =  $objClienteModel->selectAll("municipio");
 
     ?>
 
-    <form action="formEditarCliente.php" method="POST">
+    <form action="ClienteEditarView.php" method="POST">
         <!-- Input Hidden tag que fica oculta para receber o valor do ID do form--->
         <!-- passo os id para a propriedade value -->
         <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
@@ -73,8 +76,9 @@ include 'BD.php';
         <br>
 
         <input type="submit" value="Editar">
-        <a href="listarCliente.php"><button>Voltar</button></a>
     </form>
+    <a href="ClienteListarView.php"><button>Voltar</button></a>
+
 </body>
 
 </html>
