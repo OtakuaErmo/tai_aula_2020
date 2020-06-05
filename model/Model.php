@@ -1,5 +1,5 @@
 <?php
-include '../Config.php';
+include '../../Config.php';
 
 class Model
 {

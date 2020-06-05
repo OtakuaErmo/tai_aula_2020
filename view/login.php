@@ -1,5 +1,5 @@
 <?php
-include 'BD.php';
+include '../model/Model.php';
 
 session_start();
 
@@ -18,19 +18,12 @@ $_SESSION['usuario'] = null;
 <body>
     <?php
 
-    //cria um instancia do objeto BD
-    $objBD = new BD();
-    //Faz a chamada do metodo Connection para conecta com o Banco de Dados
-    $objBD->connection();
-
     if (!empty($_POST)) {
         //chama o metodo LOGAR recebendo os dados do usuário através do metodo $_POST
-        $objUsuario =  $objBD->logar($_POST["login"], $_POST['senha']);
-        var_dump($objUsuario);
-        //  exit;
+        $objUsuario =  Model::logar($_POST["login"], $_POST['senha']);
         if (!empty($objUsuario)) {
             $_SESSION['usuario'] = $objUsuario;
-            header("Location: listarCliente.php");
+            header("Location: cliente/listarCliente.php");
         } else {
             echo "<b style='color:red;'>Login ou Senha errado, tente novamente! </b>";
         }

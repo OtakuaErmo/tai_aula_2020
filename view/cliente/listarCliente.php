@@ -1,8 +1,9 @@
 <?php
 // inclui o arquivo BD.php dentro deste arquivo 
 //para que seus metodos fiquem visiveis
-include 'BD.php';
-include 'util.php';
+include '../../control/ClienteController.php';
+include '../../model/MunicipioModel.php';
+include '../../lib/util.php';
 
 session_start();
 
@@ -40,18 +41,17 @@ $objUsuario = $_SESSION['usuario'];
         <input type="submit" value="Buscar">
     </form>
     <?php
-    //cria um instancia do objeto BD
-    $objBD = new BD();
-    //Faz a chamada do metodo Connection para conecta com o Banco de Dados
-    $objBD->connection();
+
+    $objClienteController = new ClienteController();
 
     if (!empty($_POST['valor'])) {
-        $result = $objBD->search($_POST);
+        $result = $objClienteController->search($_POST);
     } else {
         //Faz a chamada do metodo selectAll para conecta com o Banco de Dados
-        $result = $objBD->selectAll();
+        $result = $objClienteController->index();
     }
-
+    
+    $objMunicipioModel = new MunicipioModel();
     //monta uma tabela e lista os dados atraves do foreach
     echo "
 <table style=''>
@@ -64,7 +64,7 @@ $objUsuario = $_SESSION['usuario'];
   <th>Ação</th>
 </tr>";
     foreach ($result as $item) {
-        $objMunicipio = $objBD->find($item['municipio_id'], "municipio");
+        $objMunicipio = $objMunicipioModel::find($item['municipio_id']);
         echo "
     <tr>
       <td>" . $item['id'] . "</td>
