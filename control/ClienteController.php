@@ -20,14 +20,21 @@ class ClienteController
 
     public function create($dados)
     {
+
         if (
             !empty($dados['nome']) && !empty($dados['telefone']) &&
             !empty($dados['cpf']) &&  !empty($dados['email']) &&
             !empty($dados['municipio_id'])
         ) {
+            /*
+            $municipio_id = $dados['municipio_id'];
+            unset($dados['municipio_id']);
+            array_push($dados, ['municipio_id' => intval($municipio_id)]);
+*/
             $this->model::insert($dados);
+
             echo "<script>alert('Registro inserido com sucesso!')</script>";
-            echo "<script>window.location='ClienteListarView.php'</script>";
+            echo "<script>window.location='listarClienteView.php'</script>";
         } else {
             echo "<script>alert('Alguns campos não foram informados, tente novamente')</script>";
         }
@@ -52,11 +59,10 @@ class ClienteController
         if (empty($objModel)) {
             echo "<script>alert('O ID informado não exite!')</script>";
             echo "<script>window.location='ClienteListarView.php'</script>";
-        }else{
+        } else {
             $this->model::deletar($id);
             echo "<script>alert('Registro removido com sucesso!')</script>";
             echo "<script>window.location='ClienteListarView.php'</script>";
-
         }
     }
     public function search($dados)

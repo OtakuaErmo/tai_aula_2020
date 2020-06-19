@@ -113,7 +113,7 @@ class Model
         //execulta o SQL substituindo onde tem a iterrogacao pelos parametros 
         //passados atraves do vetor seguindo a mesma sequencia da esqueda para direita
         //o ultimo e o id representa o registro que sera alterado
-        $stmt->execute([$arrayValue]);
+        $stmt->execute($arrayValue);
 
         //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
@@ -124,11 +124,11 @@ class Model
     {
         $nameTable = self::getTable();
         //sql do Insert
-        $sql = "INSERT INTO $nameTable (";
+        $sql = "INSERT INTO $nameTable(";
 
         $flag = 0;
         foreach ($dados as $campo => $valor) {
-            $sql .= $flag == 0 ? $campo : ", $campo";
+            $sql .= ($flag == 0 ? $campo : ", $campo");
 
             $flag = 1;
         }
@@ -139,7 +139,7 @@ class Model
         $arrayValue = [];
         foreach ($dados as $campo => $valor) {
 
-            $sql .= $flag == 0 ? " ? " : ", ?";
+            $sql .= ($flag == 0 ? " ? " : ", ?");
             $flag = 1;
 
             $arrayValue[] = $valor;
@@ -152,9 +152,8 @@ class Model
         $stmt = $conn->prepare($sql);
         //execulta o SQL substituindo onde tem a iterrogacao pelos parametros 
         //passados atraves do vetor seguindo a mesma sequencia da esqueda para direita
-        $stmt->execute([$arrayValue]);
+        $stmt->execute($arrayValue);
 
-        //retorna verdadeiro ou falso se executou a operacao
         return $stmt;
     }
 

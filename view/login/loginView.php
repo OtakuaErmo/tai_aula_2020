@@ -1,5 +1,5 @@
 <?php
-include '../model/Model.php';
+include '../../model/Model.php';
 
 session_start();
 
@@ -23,14 +23,14 @@ $_SESSION['usuario'] = null;
         $objUsuario =  Model::logar($_POST["login"], $_POST['senha']);
         if (!empty($objUsuario)) {
             $_SESSION['usuario'] = $objUsuario;
-            header("Location: cliente/listarCliente.php");
+            header("Location: ../cliente/listarClienteView.php");
         } else {
             echo "<b style='color:red;'>Login ou Senha errado, tente novamente! </b>";
         }
     }
 
     ?>
-    <form action="login.php" method="POST">
+    <form action="loginView.php" method="POST">
         <h2>Bem vindo, informe suas credênciais</h2>
         <label>Login</label>
         <input type="text" name="login"><br>

@@ -1,8 +1,9 @@
 <?php
 // inclui o arquivo BD.php dentro deste arquivo 
 //para que seus metodos fiquem visiveis
-include 'BD.php';
-include 'util.php';
+include '../../control/ClienteController.php';
+include '../../model/MunicipioModel.php';
+include '../../lib/util.php';
 
 session_start();
 
@@ -22,27 +23,22 @@ verificarLogin();
 <body>
     <?php
 
-    //cria um instancia do objeto BD
-    $objBD = new BD();
-    //Faz a chamada do metodo Connection para conecta com o Banco de Dados
-    $objBD->connection();
+    $objClienteController = new ClienteController();
 
     if (!empty($_POST)) {
         //chama o metodo INSERT recebendo os dados do usuário através do metodo $_POST
-        $objBD->insert($_POST);
-        //metodo header faz uma chamada para a tela de listagem
-        //depois que realizou a adicao
-        header("Location: listarCliente.php");
+        $objClienteController->create($_POST);
     }
 
-    $resultMunicipios =  $objBD->selectAll("municipio");
+    $objMunicipioModel = new MunicipioModel();
+    $resultMunicipios =  $objMunicipioModel::selectAll();
 
     ?>
 
     <!-- propriedade action faz a chamada do BD.php para pegar o valor do form
         o restante e um formulario comum usando o metodo POST
     -->
-    <form action="formCliente.php" method="POST">
+    <form action="formClienteView.php" method="POST">
         <label>Nome</label>
         <input type="text" name="nome"> <br>
 
@@ -66,8 +62,8 @@ verificarLogin();
         </select>
         <br>
         <input type="submit" value="Enviar">
-        <a href="listarCliente.php"><button>Voltar</button></a>
     </form>
+    <a href="listarClienteView.php"><button>Voltar</button></a>
 </body>
 
 </html>

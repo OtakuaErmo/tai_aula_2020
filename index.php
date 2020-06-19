@@ -10,6 +10,8 @@
 
 <body>
     <?php
+
+    header("location: view/login/loginView.php");
     // echo "Hello World2";
     $num01 = 20;
     $num02 = 10;
@@ -52,11 +54,11 @@
 
     print_r($arrayExemplo);
 
-    echo "<br>Dia:" . $dia."<br>";
-    echo "Mes:" . $mes."<br>";
-    echo "Ano:" . $ano."<br>";
+    echo "<br>Dia:" . $dia . "<br>";
+    echo "Mes:" . $mes . "<br>";
+    echo "Ano:" . $ano . "<br>";
 
-    echo (__DIR__."<br>");
+    echo (__DIR__ . "<br>");
     echo (__FILE__);
 
     ?>

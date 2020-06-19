@@ -1,4 +1,8 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
+error_reporting(E_ALL);
 // inclui o arquivo BD.php dentro deste arquivo 
 //para que seus metodos fiquem visiveis
 include '../../control/ClienteController.php';
@@ -24,14 +28,14 @@ $objUsuario = $_SESSION['usuario'];
 </head>
 
 <body>
-    <a href="login.php">Sair</a>
+    <a href="../login/loginView.php">Sair</a>
     <h3>Olá <?php echo $objUsuario->nome ?></h3>
     <!-- formulario com o botao para chamar o arquivo formCliente -->
-    <form action="formCliente.php" method="POST">
+    <form action="formClienteView.php" method="POST">
         <label>Cadastrar Cliente: </label>
         <input type="submit" value="Novo">
     </form>
-    <form action="listarCliente.php" method="POST">
+    <form action="listarClienteView.php" method="POST">
         <label>Buscar: </label>
         <input type="text" name="valor" />
         <select name="tipo">
@@ -72,8 +76,8 @@ $objUsuario = $_SESSION['usuario'];
       <td>" . $item['cpf'] . "</td>
       <td>" . $objMunicipio->nome  . "</td>
       <td>" . $objMunicipio->uf  . "</td>
-      <td><a href='formEditarCliente.php?id=" . $item['id'] . "'>Editar</a></td>
-      <td><a href='formDeletarCliente.php?id=" . $item['id'] . "'>Deletar</a></td>
+      <td><a href='formEditarClienteView.php?id=" . $item['id'] . "'>Editar</a></td>
+      <td><a href='formDeletarClienteView.php?id=" . $item['id'] . "'>Deletar</a></td>
     </tr>
     ";
         //a ultima linha foi criado um link para passar o parameto do id para a pagina formEditarCliente
